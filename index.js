@@ -37,10 +37,10 @@ app.use(cors({
   origin: 'https://gray-glacier-0732b8903.5.azurestaticapps.net'
 }));
 
-app.get('/api/test', async (req, res) => {
+app.get('/', async (req, res) => {
   console.log(req.body);
   console.log('test')
-  res.status(200).send("TEST GOOD")
+  res.status(200).json({message: "TEST GOOD"})
 })
 
 
