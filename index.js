@@ -40,7 +40,7 @@ app.use(cors({
 app.get('/api/test', async (req, res) => {
   console.log(req.body);
   console.log('test')
-  res.statusCode(200).send("TEST GOOD")
+  res.status(200).send("TEST GOOD")
 })
 
 
@@ -69,7 +69,7 @@ app.use(authInterceptor);
 app.get('/api/test/auth', async (req, res) => {
   console.log(req.body);
   console.log('test auth')
-  res.statusCode(200).send("TEST AUTH GOOD")
+  res.status(200).send("TEST AUTH GOOD")
 })
 
 
