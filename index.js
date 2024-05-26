@@ -34,13 +34,20 @@ async function verifyIdToken(idToken) {
 }
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL
+  origin: 'https://gray-glacier-0732b8903.5.azurestaticapps.net'
 }));
+
+app.get('/api/test', async (req, res) => {
+  console.log(req.body);
+  console.log('test')
+  res.statusCode(200).send("TEST GOOD")
+})
+
 
 app.post('/api/login', async (req, res) => {
   console.log(req.body);
   user = await verifyIdToken(req.body.credential);
-  res.redirect(`${process.env.FRONTEND_URL}/?token=${req.body.credential}&user=${user}`)
+  res.redirect(`https://gray-glacier-0732b8903.5.azurestaticapps.net/?token=${req.body.credential}&user=${user}`)
 })
 
 app.use(session({
@@ -59,8 +66,17 @@ app.use((req, res, next) => {
 app.use(authInterceptor);
 
 
+app.get('/api/test/auth', async (req, res) => {
+  console.log(req.body);
+  console.log('test auth')
+  res.statusCode(200).send("TEST AUTH GOOD")
+})
+
+
 app.use('/api/images', imageController);
 app.use('/auth', authController);
+
+
 
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
