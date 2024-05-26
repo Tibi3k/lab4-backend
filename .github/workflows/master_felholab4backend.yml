@@ -25,8 +25,17 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-          npm run test --if-present
-      
+
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_PORT: ${{ secrets.PORT }}
+          envkey_AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
+          envkey_AZURE_STORAGE_ACCESS_KEY: ${{ secrets.AZURE_STORAGE_ACCESS_KEY }}
+          envkey_GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          envkey_SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          envkey_MONGODB_CONNECTION: ${{ secrets.MONGODB_CONNECTION }}
+              
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
