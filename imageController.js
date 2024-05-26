@@ -30,7 +30,7 @@ router.post('/upload', upload.single("image"), async (req, res) => {
   const image = req.body.image
   console.log(image)
   const buffer = Buffer.from(image, 'base64');
-  const blobName = `${uuidv1()}-${imageName}`;
+  const blobName = `${uuidv1()}-${imageName}.png`;
   blobService.createBlockBlobFromText(containerName, blobName, buffer, options, async (err, result) => {
     if (err) {
       console.error(err);
