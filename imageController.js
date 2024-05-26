@@ -34,7 +34,7 @@ router.post('/upload', upload.single("image"), async (req, res) => {
   blobService.createBlockBlobFromText(containerName, blobName, buffer, options, async (err, result) => {
     if (err) {
       console.error(err);
-      return res.status(500).send('Error uploading image to Azure Blob Storage');
+      return res.status(500).send('Error uploading image to Azure Blob Storage', err);
     }
     result.contentSettings.contentDisposition = 'inline'
     const imageUrl = blobService.getUrl(containerName, blobName);
@@ -50,7 +50,7 @@ router.post('/upload', upload.single("image"), async (req, res) => {
       return res.status(200).send('Image uploaded successfully');
     } catch (err) {
       console.error(err);
-      res.status(500).send('Error saving image metadata to Azure SQL Database');
+      res.status(500).send('Error saving image metadata to Azure SQL Database', err);
     }
   });
 });
