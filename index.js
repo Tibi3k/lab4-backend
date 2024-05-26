@@ -21,7 +21,7 @@ mongoose.connect(process.env.MONGODB_CONNECTION, {
 .then(() => console.log('MongoDB connected...'))
 .catch(err => console.error('MongoDB connection error:', err));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 async function verifyIdToken(idToken) {
@@ -34,13 +34,13 @@ async function verifyIdToken(idToken) {
 }
 
 app.use(cors({
-  origin: 'http://localhost:4200'
+  origin: process.env.FRONTEND_URL
 }));
 
 app.post('/api/login', async (req, res) => {
   console.log(req.body);
   user = await verifyIdToken(req.body.credential);
-  res.redirect(`http://localhost:4200/?token=${req.body.credential}&user=${user}`)
+  res.redirect(`${process.env.FRONTEND_URL}/?token=${req.body.credential}&user=${user}`)
 })
 
 app.use(session({

@@ -35,7 +35,8 @@ jobs:
           envkey_GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           envkey_SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
           envkey_MONGODB_CONNECTION: ${{ secrets.MONGODB_CONNECTION }}
-              
+          envkey_FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
