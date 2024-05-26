@@ -37,11 +37,14 @@ jobs:
           envkey_MONGODB_CONNECTION: ${{ secrets.MONGODB_CONNECTION }}
           envkey_FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
 
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: node-app
-          path: .
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -57,7 +60,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: node-app
-      
+
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+        
       - name: Login to Azure
         uses: azure/login@v1
         with:
