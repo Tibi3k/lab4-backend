@@ -37,13 +37,6 @@ app.use(cors({
   origin: 'https://gray-glacier-0732b8903.5.azurestaticapps.net'
 }));
 
-app.get('/', async (req, res) => {
-  console.log(req.body);
-  console.log('test')
-  res.status(200).json({message: "TEST GOOD"})
-})
-
-
 app.post('/api/login', async (req, res) => {
   console.log(req.body);
   user = await verifyIdToken(req.body.credential);
@@ -55,13 +48,6 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }));
-
-app.use((req, res, next) => {
-  if (!req.session.csrfSecret) {
-    req.session.csrfSecret = tokens.secretSync();
-  }
-  next();
-});
 
 app.use(authInterceptor);
 

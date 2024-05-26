@@ -7,7 +7,6 @@ const ImageSchema = require('./models/ImageSchema');
 const router = express.Router();
 const blobService = azure.createBlobService();
 const containerName = 'images';
-const fs = require('fs');
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });

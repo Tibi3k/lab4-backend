@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -34,7 +34,7 @@ jobs:
           envkey_GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           envkey_SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
           envkey_MONGODB_CONNECTION: ${{ secrets.MONGODB_CONNECTION }}
-          
+
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
 
