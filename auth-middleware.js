@@ -35,6 +35,9 @@ async function verifyToken (credentials){
 
 async function authInterceptor(req, res, next) {
   console.log('authenticating')
+  if (req.path === '/api/images') {
+    return next();
+  }
   const authHeader = req.headers['authorization'];
   if (!authHeader) {
     return res.status(401).json({ error: 'Credentials or CSRF token missing' });

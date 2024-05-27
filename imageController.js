@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/upload', upload.single("image"), async (req, res) => {
-  const userId = req.body.userId
+  const userId = req.user.sub
   const imageName = req.body.imageName
   const image = req.body.image
   console.log(image)
@@ -54,5 +54,13 @@ router.post('/upload', upload.single("image"), async (req, res) => {
     }
   });
 });
+
+router.delete('/:id', async (req, res)=> {
+  const id = req.params.id;
+  console.log(id)
+  const result = await ImageSchema.deleteOne({_id: id});
+  console.log(result)
+  res.status(204).send()
+})
 
 module.exports = router;
