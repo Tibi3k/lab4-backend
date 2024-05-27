@@ -40,7 +40,7 @@ app.use(cors({
 app.post('/api/login', async (req, res) => {
   console.log(req.body);
   user = await verifyIdToken(req.body.credential);
-  res.redirect(`https://gray-glacier-0732b8903.5.azurestaticapps.net/?token=${req.body.credential}&user=${user}`)
+  res.redirect(`https://gray-glacier-0732b8903.5.azurestaticapps.net/?token=${req.body.credential}&user=${user.sub}`)
 })
 
 app.use(session({
